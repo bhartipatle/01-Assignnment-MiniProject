@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-
-
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <!DOCTYPE html>
@@ -12,10 +10,8 @@
 </head>
 <body>
 	<h3>Contact Info</h3>
+	${succMsg}
 	<form:form action="saveContact?contactId=${contact.contactId}" method="POST" modelAttribute="contact">
-
-		${succMsg}
-
 		<table>
 			<tr>
 				<td>Name :</td>
@@ -34,7 +30,6 @@
 				<td><input type="submit" value="Submit" /></td>
 			</tr>
 		</table>
-
 	</form:form>
 	
 	<a href="view-contacts">View All Contacts</a>

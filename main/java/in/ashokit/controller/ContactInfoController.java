@@ -3,7 +3,9 @@ package in.ashokit.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.*;
@@ -36,12 +38,21 @@ public class ContactInfoController {
 	}
 	
 	@PostMapping("/saveContact")
-	public String handleSubmitBtn(ContactInfo contact, Model model) {
+	public String handleSubmitBtn(@ModelAttribute("contact") ContactInfo contact, Model model) {
+		String status="";
+		if(contact.getContactId() == null) {
+			status = "save";
+		}
 		boolean isSaved = service.addContact(contact);
 		if (isSaved) {
-			model.addAttribute("succMsg", "Contact Saved");
-			// ? model.addAttribute("succMsg", "Contact Saved"):model.addAttribute("succMsg", "Contact Updated Successfully");
-		} else {
+			if("save".equals(status)) {				
+				model.addAttribute("succMsg", "Contact saved");
+			 }
+		    else{
+				model.addAttribute("succMsg", "Contact Updated Successfully");
+			}
+		}
+		else {
 			model.addAttribute("failMsg", "Failed to save contact");
 		}
 		return "contact";

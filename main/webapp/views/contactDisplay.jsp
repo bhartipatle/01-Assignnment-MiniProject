@@ -34,7 +34,7 @@
 		 		<td>${contact.contactEmail }</td>
 		 		<td>${contact.contactNumber }</td>
 		 		<td><a href="edit?cid=${contact.contactId }">Edit</a> 
-		 		<a href="delete?cid=${contact.contactId }">Delete</a></td>
+		 		<a href="delete?cid=${contact.contactId}" onclick="return confirmDelete()">Delete</a></td>
 		 	</tr>
 		 </c:forEach>
 		</tbody>
